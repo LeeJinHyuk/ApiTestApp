@@ -5,23 +5,24 @@ var http = require("http");
 
 var serverObj;
 
-function setEvent() {
+function setEvent(onRoute) {
     serverObj.on("request", function(request, response) {
-        console.log("server.on request");
+        console.log("[server] server.on request");
+        onRoute();
     });
 
     serverObj.on("connection", function(request, response) {
-        console.log("server.on connection");
+        console.log("[server] server.on connection");
     });
 }
 
-function _start() {
+function _start(onRoute) {
 
     serverObj = http.createServer();
-    setEvent();
+    setEvent(onRoute);
     serverObj.listen(8888);
 
-    console.log("Start server");
+    console.log("[server] Start server");
 }
 
 exports.start = _start;
