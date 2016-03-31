@@ -16,9 +16,9 @@ function loadMainPage(urlObj, response) {
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
     fs.readFile("index.html", function(error, data) {
-        console.log("readFile");
-        console.log(error);
-        console.log(data);
+        console.log("[requestHandler] readFile");
+        console.log("[requestHandler] error : " + error);
+        console.log("[requestHandler] data : " + data);
 
         response.writeHead(200, {"Content-Type" : "text/html"});
         response.end(data);
