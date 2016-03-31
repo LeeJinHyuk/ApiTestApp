@@ -10,14 +10,16 @@ var handle = {
 
 /**
  * 메인 페이지 이동
- * @param urlObj
- * @param response
  */
 function loadMainPage(urlObj, response) {
     console.log("[requestHandler] loadMainPage");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
-    fs.readFile("../index.html", function(error, data) {
+    fs.readFile("index.html", function(error, data) {
+        console.log("readFile");
+        console.log(error);
+        console.log(data);
+
         response.writeHead(200, {"Content-Type" : "text/html"});
         response.end(data);
     });
@@ -25,8 +27,6 @@ function loadMainPage(urlObj, response) {
 
 /**
  * 데이터 전송
- * @param urlObj
- * @param response
  */
 function sendData(urlObj, response) {
     console.log("[requestHandler] sendData");
