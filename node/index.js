@@ -4,5 +4,6 @@
 var server = require("./server");
 var router = require("./router");
 var requestHandler = require("./requestHandler");
+var socket = require("./socket");
 
-server.start(router.route, requestHandler.handler);
+server.start(router.route, requestHandler.handler, socket.start);
