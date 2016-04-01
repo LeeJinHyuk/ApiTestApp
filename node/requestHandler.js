@@ -5,7 +5,7 @@ var fs = require("fs");
 
 var handle = {
     "/" : loadMainPage,
-    "data" : sendData,
+    "/data" : sendData,
     "file" : loadMainFile
 };
 
@@ -44,12 +44,12 @@ function loadMainFile(urlObj, response) {
 /**
  * 데이터 전송
  */
-function sendData(urlObj, response) {
+function sendData(urlObj, response, ioObj) {
     console.log("[requestHandler] sendData");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
     if (urlObj.method === "POST") {
-
+        
     } else {
 
     }

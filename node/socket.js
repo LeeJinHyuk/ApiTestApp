@@ -22,6 +22,7 @@ function setEvent() {
 function _start(serverObj) {
     io = socket.listen(serverObj);
     setEvent();
+    return io;
 }
 
 exports.start = _start;
