@@ -20,7 +20,7 @@ function setEvent() {
 }
 
 function _start(serverObj) {
-    io = socket.listen(severObj);
+    io = socket.listen(serverObj);
     setEvent();
 }
 

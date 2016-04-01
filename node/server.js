@@ -37,7 +37,7 @@ function _start(onRoute, handler, onStart) {
     serverObj = http.createServer();
     setEvent(onRoute, handler);
     // 웹 서버 실행
-    serverObj.listen(8888);
+    serverObj.listen(9574);
     // 웹 소켓 생성 및 실행
     onStart(serverObj);
     console.log("[server] Start server");
