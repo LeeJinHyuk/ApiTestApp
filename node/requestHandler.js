@@ -5,8 +5,11 @@ var fs = require("fs");
 
 var handle = {
     "/" : loadMainPage,
-    "data" : sendData
+    "data" : sendData,
+    "file" : loadMainFile
 };
+
+var defaultPath = __dirname + "/..";
 
 /**
  * 메인 페이지 이동
@@ -15,12 +18,25 @@ function loadMainPage(urlObj, response) {
     console.log("[requestHandler] loadMainPage");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
-    fs.readFile("index.html", function(error, data) {
+    fs.readFile(defaultPath + "/index.html", function(error, data) {
         console.log("[requestHandler] readFile");
         console.log("[requestHandler] error : " + error);
         console.log("[requestHandler] data : " + data);
 
         response.writeHead(200, {"Content-Type" : "text/html"});
+        response.end(data);
+    });
+}
+
+function loadMainFile(urlObj, response) {
+    console.log("[requestHandler] loadMainFile");
+    console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
+
+    fs.readFile(defaultPath + urlObj.pathName, function(error, data) {
+        console.log("[requestHandler] readFile");
+        console.log("[requestHandler] error : " + error);
+        console.log("[requestHandler] data : " + data);
+        response.writeHead(200);
         response.end(data);
     });
 }
