@@ -14,7 +14,7 @@ var socketManager = (function() {
         console.log("[socketManager] setEvent");
         socket.on("requestData", function(data) {
             console.log("[socketManager] socket.on requestData");
-            
+            console.log("[socketManager] data : " + JSON.stringify(data));
         });
         
         socket.on("responseData", function(data) {
