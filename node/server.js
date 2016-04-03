@@ -14,30 +14,20 @@ function setEvent(onRoute, handler) {
         var pathName;
         var method;
         var urlObj;
-        var postData;
 
         console.log("[server] url : " + url.parse(request.url).href);
         console.log("[server] request : " + queryString.stringify(request));
-
-        request.on("data", function(data) {
-            postData = "" + data;
-        });
-
-        request.on('end', function () {
-            postData = queryString.parse(postData);
-        });
 
         pathName = url.parse(request.url).pathname;
         method = request.method;
 
         urlObj = {
             "pathName" : pathName,
-            "method" : method,
-            "postData" : postData
+            "method" : method
         };
         
         // pathName, method 에 따라 처리 
-        onRoute(urlObj, handler, response, ioObj);
+        onRoute(urlObj, handler, response, request, ioObj);
     });
 
     serverObj.on("connection", function(request, response) {

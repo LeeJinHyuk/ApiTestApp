@@ -1,7 +1,7 @@
 /**
  * Created by eerto_000 on 2016-03-28.
  */
-function _router(urlObj, handler, response, ioObj) {
+function _router(urlObj, handler, response, request, ioObj) {
     var path;
     console.log("[router] pathName : " + urlObj.pathName);
 
@@ -15,7 +15,7 @@ function _router(urlObj, handler, response, ioObj) {
     if (typeof handler[urlObj.pathName] === "function") {
         console.log("[router] Find");
         // pathName 에 해당하는 콜백 수행
-        handler[urlObj.pathName](urlObj, response, ioObj);
+        handler[urlObj.pathName](urlObj, response, request, ioObj);
     } else if (path === "file" && typeof handler[path] === "function") {
         console.log("[router] Find loading file");
         handler[path](urlObj, response);
