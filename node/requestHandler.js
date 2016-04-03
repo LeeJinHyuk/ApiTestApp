@@ -4,9 +4,9 @@
 var fs = require("fs");
 
 var handle = {
-    "/" : loadMainPage,
-    "/data" : sendData,
-    "file" : loadMainFile
+    "/" : _loadMainPage,
+    "/data" : _sendData,
+    "file" : _loadMainFile
 };
 
 var defaultPath = __dirname + "/..";
@@ -14,7 +14,7 @@ var defaultPath = __dirname + "/..";
 /**
  * 메인 페이지 이동
  */
-function loadMainPage(urlObj, response) {
+function _loadMainPage(urlObj, response) {
     console.log("[requestHandler] loadMainPage");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
@@ -28,7 +28,7 @@ function loadMainPage(urlObj, response) {
     });
 }
 
-function loadMainFile(urlObj, response) {
+function _loadMainFile(urlObj, response) {
     console.log("[requestHandler] loadMainFile");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
@@ -44,16 +44,39 @@ function loadMainFile(urlObj, response) {
 /**
  * 데이터 전송
  */
-function sendData(urlObj, response, ioObj) {
+function _sendData(urlObj, response, request, ioObj) {
     console.log("[requestHandler] sendData");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
+    var postData;
+    var cors = {};
+
+    cors["Access-Control-Allow-Origin"] = "*";
+
     if (urlObj.method === "POST") {
-        
+        request.on("data", function(data) {
+            console.log("[requestHandler] request data : " + data);
+            postData = data;
+        });
+
+        request.on('end', function () {
+            console.log("[requestHandler] request end postData : " + postData);
+            response.writeHead(200, cors);
+            response.end();
+
+            transmitData(ioObj, postData);
+        });
     } else {
 
     }
+}
 
+/**
+ * 데이터를 페이지로 전송
+ */
+function transmitData(ioObj, postData) {
+    console.log("[requestHandler] transmitData postData : " + postData);
+    ioObj.sockets.emit("requestData", postData);
 }
 
 exports.handler = handle;
