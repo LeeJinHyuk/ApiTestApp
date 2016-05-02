@@ -2,6 +2,7 @@
  * Created by eerto_000 on 2016-03-30.
  */
 var fs = require("fs");
+var qs = require('querystring');
 
 var handle = {
     "/" : _loadMainPage,
@@ -48,7 +49,7 @@ function _sendData(urlObj, response, request, ioObj) {
     console.log("[requestHandler] sendData");
     console.log("[requestHandler] pathName : " + urlObj.pathName + ", method : " + urlObj.method);
 
-    var postData;
+    var postData = "";
     var cors = {};
 
     cors["Access-Control-Allow-Origin"] = "*";
@@ -56,7 +57,7 @@ function _sendData(urlObj, response, request, ioObj) {
     if (urlObj.method === "POST") {
         request.on("data", function(data) {
             console.log("[requestHandler] request data : " + data);
-            postData = data;
+            postData += data.toString();
         });
 
         request.on('end', function () {
@@ -64,7 +65,7 @@ function _sendData(urlObj, response, request, ioObj) {
             response.writeHead(200, cors);
             response.end();
 
-            transmitData(ioObj, postData);
+            transmitData(ioObj, qs.parse(postData));
         });
     } else {
 
