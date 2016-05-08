@@ -6,7 +6,8 @@ var qs = require('querystring');
 
 var handle = {
     "/" : _loadMainPage,
-    "/data" : _sendData,
+    "/requestData" : _sendData,
+    "/responseData" : _sendData,
     "file" : _loadMainFile
 };
 
@@ -43,7 +44,7 @@ function _loadMainFile(urlObj, response) {
 }
 
 /**
- * 데이터 전송
+ * api 콜 및 서버 수신 데이터 전송
  */
 function _sendData(urlObj, response, request, ioObj) {
     console.log("[requestHandler] sendData");
@@ -65,10 +66,12 @@ function _sendData(urlObj, response, request, ioObj) {
             response.writeHead(200, cors);
             response.end();
 
-            transmitData(ioObj, qs.parse(postData));
+            if (urlObj.pathName === "/requestData") {
+                transmitData(ioObj, qs.parse(postData));
+            } else {
+                transmitData(ioObj, JSON.parse(postData));
+            }
         });
-    } else {
-
     }
 }
 
