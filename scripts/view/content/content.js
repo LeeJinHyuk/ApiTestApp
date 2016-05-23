@@ -12,12 +12,4 @@ var Content = React.createClass({
     }
 });
 
-window.onload = function() {
-    socketManager.createSocket();
-    viewManager.initView();
-
-    ReactDOM.render(
-        <Content />,
-        document.getElementById("contentBox")
-    );
-};
+module.exports = Content;

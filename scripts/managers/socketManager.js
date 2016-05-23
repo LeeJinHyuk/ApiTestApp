@@ -27,3 +27,5 @@ var socketManager = (function() {
         createSocket : _createSocket
     };
 }());
+
+module.exports = socketManager;

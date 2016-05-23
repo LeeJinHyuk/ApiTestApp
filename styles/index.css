@@ -1,7 +1,7 @@
-#content {
-    margin: 10px;
+#contentBox {
+    margin: 0px auto;
     padding: 0px;
-    width: 500px;
-    height: 500px;
+    width: 1024px;
+    height: 100%;
     background-color: rgba(0,0,0,0.5);
 }
