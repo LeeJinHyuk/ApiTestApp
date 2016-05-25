@@ -7,5 +7,5 @@ var viewManager = require("./managers/viewManager");
 
 window.onload = function() {
     socketManager.createSocket();
-    viewManager.initView();
+    viewManager.init();
 };

@@ -55,7 +55,7 @@
 
 	window.onload = function () {
 	  socketManager.createSocket();
-	  viewManager.initView();
+	  viewManager.init();
 	};
 
 /***/ },
@@ -69,6 +69,7 @@
 	 */
 	var socketManager = function () {
 	    var socket;
+	    var listener = [];
 
 	    function _createSocket() {
 	        console.log("[socketManager] _createSocket");
@@ -81,6 +82,10 @@
 	        socket.on("requestData", function (data) {
 	            console.log("[socketManager] socket.on requestData");
 	            console.log("[socketManager] data : " + JSON.stringify(data));
+
+	            for (var i = 0; i < listener.length; i++) {
+	                listener[i](data);
+	            }
 	        });
 
 	        socket.on("responseData", function (data) {
@@ -88,8 +93,15 @@
 	        });
 	    }
 
+	    function _addEventListener(callback) {
+	        if (listener.indexOf(callback) === -1) {
+	            listener.push(callback);
+	        }
+	    }
+
 	    return {
-	        createSocket: _createSocket
+	        createSocket: _createSocket,
+	        addEventListener: _addEventListener
 	    };
 	}();
 
@@ -102,15 +114,24 @@
 	"use strict";
 
 	var Content = __webpack_require__(3);
+	var sockManager = __webpack_require__(1);
 
 	var viewManager = function () {
 
-	    function _initView() {
+	    function _init() {
+	        sockManager.addEventListener(showResponseListData);
+	    }
+
+	    /**
+	     * 전달 받은 데이터를 화면에 노출
+	     */
+	    function showResponseListData(data) {
+	        console.log("[viewManager] showResponseListData data : " + data);
 	        ReactDOM.render(React.createElement(Content, null), document.getElementById("contentBox"));
 	    }
 
 	    return {
-	        initView: _initView
+	        init: _init
 	    };
 	}();
 

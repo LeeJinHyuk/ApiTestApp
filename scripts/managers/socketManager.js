@@ -3,6 +3,7 @@
  */
 var socketManager = (function() {
     var socket;
+    var listener = [];
 
     function _createSocket() {
         console.log("[socketManager] _createSocket");
@@ -15,6 +16,10 @@ var socketManager = (function() {
         socket.on("requestData", function(data) {
             console.log("[socketManager] socket.on requestData");
             console.log("[socketManager] data : " + JSON.stringify(data));
+
+            for(var i = 0; i < listener.length; i++) {
+                listener[i](data);
+            }
         });
         
         socket.on("responseData", function(data) {
@@ -23,8 +28,15 @@ var socketManager = (function() {
         });
     }
 
+    function _addEventListener(callback) {
+        if (listener.indexOf(callback) === -1) {
+            listener.push(callback);
+        }
+    }
+
     return {
-        createSocket : _createSocket
+        createSocket : _createSocket,
+        addEventListener : _addEventListener
     };
 }());
 
