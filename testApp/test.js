@@ -19,12 +19,12 @@ window.onload = function() {
 
     test = JSON.stringify(obj);
     $.ajax({
-        url: "http://192.168.0.2:9574/responseData",
-        //url: "http://192.168.0.2:9574/requestData",
+        //url: "http://192.168.0.2:9574/responseData",
+        url: "http://192.168.0.2:9574/requestData",
         dataType : "json",
         method : "POST",
-        //data: "catId=MGREGRE111&contentId=23232332",
-        data : JSON.stringify(obj),
+        data: "catId=MGREGRE111&contentId=23232332",
+        //data : JSON.stringify(obj),
         success : function(data, text, xhr) {
             console.log("success");
         },
