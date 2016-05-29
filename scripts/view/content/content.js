@@ -8,7 +8,11 @@ var Content = React.createClass({
             <ul className="content">
                 {
                     this.props.printData.map(function(result, idx) {
-                        return <List key={idx} printData={result}/>;
+                        var index = "";
+
+                        index = "list_" + idx;
+
+                        return <List className={index} key={idx} printData={result}/>;
                     })
                 }
             </ul>
@@ -18,8 +22,10 @@ var Content = React.createClass({
 
 var List = React.createClass( {
     render : function() {
+        var importClass = this.props.className + " ellipsis";
+        
         return (
-          <li>{JSON.stringify(this.props.printData)}</li>
+          <li className={importClass}>{JSON.stringify(this.props.printData)}</li>
         );
     }
 });

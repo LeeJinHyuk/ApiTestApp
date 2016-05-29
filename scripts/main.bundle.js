@@ -156,7 +156,11 @@
 	            "ul",
 	            { className: "content" },
 	            this.props.printData.map(function (result, idx) {
-	                return React.createElement(List, { key: idx, printData: result });
+	                var index = "";
+
+	                index = "list_" + idx;
+
+	                return React.createElement(List, { className: index, key: idx, printData: result });
 	            })
 	        );
 	    }
@@ -166,16 +170,11 @@
 	    displayName: "List",
 
 	    render: function render() {
-	        function jsonToString() {
-	            var data;
-
-	            data = JSON.stringify(this.props.printData);
-	            return data;
-	        }
+	        var importClass = this.props.className + " ellipsis";
 
 	        return React.createElement(
 	            "li",
-	            null,
+	            { className: importClass },
 	            JSON.stringify(this.props.printData)
 	        );
 	    }
