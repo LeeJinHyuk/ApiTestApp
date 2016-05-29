@@ -6,7 +6,11 @@ var Content = React.createClass({
     render: function() {
         return (
             <ul className="content">
-                  
+                {
+                    this.props.printData.map(function(result, idx) {
+                        return <List key={idx} printData={result}/>;
+                    })
+                }
             </ul>
         );
     }
@@ -15,7 +19,7 @@ var Content = React.createClass({
 var List = React.createClass( {
     render : function() {
         return (
-          <li />  
+          <li>{JSON.stringify(this.props.printData)}</li>
         );
     }
 });
