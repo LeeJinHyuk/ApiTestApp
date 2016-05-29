@@ -9,7 +9,7 @@ body {
     margin: 10px 0px;
     width: 1022px;
     height: 800px;
-    overflow: scroll;
+    overflow-y: scroll;
     border: 1px solid #000000;
     background: rgba(0,0,0,0.1);
 }
