@@ -1,7 +1,7 @@
 /**
  * Created by eerto_000 on 2016-04-06.
  */
-
+"use strict";
 /**
  * /requestData 의 경우 api call test
  * = 요청시 1depth json 객체 또는 string으로 전달

@@ -1,6 +1,7 @@
 /**
  * Created by user on 2016-03-31.
  */
+"use strict";
 var socketManager = (function() {
     var socket;
     var listener = [];

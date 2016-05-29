@@ -1,4 +1,4 @@
-
+"use strict";
 var Content = require("../view/content/content");
 var sockManager = require("./socketManager");
 

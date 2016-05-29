@@ -1,13 +1,21 @@
 /**
  * Created by eerto_000 on 2016-05-11.
  */
-
+"use strict";
 var Content = React.createClass({
     render: function() {
         return (
-            <div className="content">
-                <h1>Content</h1>    
-            </div>
+            <ul className="content">
+                  
+            </ul>
+        );
+    }
+});
+
+var List = React.createClass( {
+    render : function() {
+        return (
+          <li />  
         );
     }
 });
