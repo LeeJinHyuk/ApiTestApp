@@ -4,11 +4,11 @@ var dataManager = require("./dataManager");
 
 var viewManager = (function() {
 
-    function _init(sockManager) {
+    function _init(socketManager) {
         // 데이터 추가 시 실행할 리스너 등록
         dataManager.addEventListener(showResponseListData);
         // 데이터 수신 시 실행할 리스너 등록
-        sockManager.addEventListener(dataManager.setData);
+        socketManager.addEventListener(dataManager.setData);
     }
 
     /**
@@ -17,7 +17,7 @@ var viewManager = (function() {
     function showResponseListData(data) {
         console.log("[viewManager] showResponseListData data : " + data);
         ReactDOM.render(
-            <Content />,
+            <Content printData={data} />,
             document.getElementById("contentBox")
         );
     }

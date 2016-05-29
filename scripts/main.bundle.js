@@ -44,29 +44,28 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
 	/**
 	 * Created by eerto_000 on 2016-03-27.
 	 */
+	"use strict";
 
 	var socketManager = __webpack_require__(1);
 	var viewManager = __webpack_require__(2);
 
 	window.onload = function () {
 	  socketManager.createSocket();
-	  viewManager.init();
+	  viewManager.init(socketManager);
 	};
 
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
 
-	"use strict";
-
 	/**
 	 * Created by user on 2016-03-31.
 	 */
+	"use strict";
+
 	var socketManager = function () {
 	    var socket;
 	    var listener = [];
@@ -114,12 +113,15 @@
 	"use strict";
 
 	var Content = __webpack_require__(3);
-	var sockManager = __webpack_require__(1);
+	var dataManager = __webpack_require__(4);
 
 	var viewManager = function () {
 
-	    function _init() {
-	        sockManager.addEventListener(showResponseListData);
+	    function _init(socketManager) {
+	        // 데이터 추가 시 실행할 리스너 등록
+	        dataManager.addEventListener(showResponseListData);
+	        // 데이터 수신 시 실행할 리스너 등록
+	        socketManager.addEventListener(dataManager.setData);
 	    }
 
 	    /**
@@ -127,7 +129,7 @@
 	     */
 	    function showResponseListData(data) {
 	        console.log("[viewManager] showResponseListData data : " + data);
-	        ReactDOM.render(React.createElement(Content, null), document.getElementById("contentBox"));
+	        ReactDOM.render(React.createElement(Content, { printData: data }), document.getElementById("contentBox"));
 	    }
 
 	    return {
@@ -141,29 +143,80 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	"use strict";
-
 	/**
 	 * Created by eerto_000 on 2016-05-11.
 	 */
+	"use strict";
 
 	var Content = React.createClass({
 	    displayName: "Content",
 
 	    render: function render() {
 	        return React.createElement(
-	            "div",
+	            "ul",
 	            { className: "content" },
-	            React.createElement(
-	                "h1",
-	                null,
-	                "Content"
-	            )
+	            this.props.printData.map(function (result, idx) {
+	                return React.createElement(List, { key: idx, printData: result });
+	            })
+	        );
+	    }
+	});
+
+	var List = React.createClass({
+	    displayName: "List",
+
+	    render: function render() {
+	        function jsonToString() {
+	            var data;
+
+	            data = JSON.stringify(this.props.printData);
+	            return data;
+	        }
+
+	        return React.createElement(
+	            "li",
+	            null,
+	            JSON.stringify(this.props.printData)
 	        );
 	    }
 	});
 
 	module.exports = Content;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by eerto_000 on 2016-05-29.
+	 */
+	"use strict";
+
+	var dataManager = function () {
+	    var printData = [];
+	    var listener = [];
+
+	    function _setData(data) {
+	        printData.push(data);
+
+	        for (var i = 0; i < listener.length; i++) {
+	            listener[i](printData);
+	        }
+	    }
+
+	    function _addEventListener(callback) {
+	        if (listener.indexOf(callback) === -1) {
+	            listener.push(callback);
+	        }
+	    }
+
+	    return {
+	        setData: _setData,
+	        addEventListener: _addEventListener
+	    };
+	}();
+
+	module.exports = dataManager;
 
 /***/ }
 /******/ ]);

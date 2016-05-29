@@ -9,9 +9,9 @@ var dataManager = (function() {
 
     function _setData (data) {
         printData.push(data);
-        
+
         for(var i = 0; i < listener.length; i++) {
-            listener[i](data);
+            listener[i](printData);
         }
     }
 
@@ -26,3 +26,5 @@ var dataManager = (function() {
         addEventListener : _addEventListener
     }
 }());
+
+module.exports = dataManager;
