@@ -1,11 +1,14 @@
 "use strict";
 var Content = require("../view/content/content");
-var sockManager = require("./socketManager");
+var dataManager = require("./dataManager");
 
 var viewManager = (function() {
 
-    function _init() {
-        sockManager.addEventListener(showResponseListData);
+    function _init(sockManager) {
+        // 데이터 추가 시 실행할 리스너 등록
+        dataManager.addEventListener(showResponseListData);
+        // 데이터 수신 시 실행할 리스너 등록
+        sockManager.addEventListener(dataManager.setData);
     }
 
     /**
