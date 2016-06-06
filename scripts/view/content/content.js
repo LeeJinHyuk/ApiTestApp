@@ -3,16 +3,47 @@
  */
 "use strict";
 var Content = React.createClass({
+
+    getInitialState : function() {
+        return {isOpen : false};
+    },
+
+    handleClick : function(event) {
+        if (this.state.isOpen === true) {
+            this.setState({isOpen : false});
+        } else {
+            this.setState({isOpen : true});
+        }
+    },
+    
     render: function() {
+        var that = this;
+
+        // if (this.state.isOpen === true) {
+        //     listDetailTag = <ListDetail />;
+        // } else {
+        //     listDetailTag = "";
+        // }
+        
         return (
             <ul className="content">
                 {
                     this.props.printData.map(function(result, idx) {
                         var index = "";
+                        var listDetailTag;
 
                         index = "list_" + idx + " ellipsis";
 
-                        return <List className={index} key={idx} printData={result}/>;
+                        // if (that.state.isOpen === true) {
+                        //     listDetailTag = <ListDetail />;
+                        // } else {
+                        //     listDetailTag = "";
+                        // }
+
+                        return (
+                            <List className={index} onClick={that.handleClick} key={idx} printData={result}/>
+                            //{listDetailTag}
+                        );
                     })
                 }
             </ul>
@@ -22,26 +53,15 @@ var Content = React.createClass({
 
 var List = React.createClass({
 
-    handleClick : function(event) {
-        if (this.state.isOpen === true) {
-            this.setState({isOpen : false});
-        } else {
-            this.setState({isOpen : true});
-        }
+    _handleClick : function(event) {
+        this.props.onClick();
     },
 
     render : function() {
-        var importClassForDetail = "detail_" + this.props.key;
-        var listDetailTag;
-
-        if (this.state.isOpen === true) {
-            listDetailTag = <ListDetail className={importClassForDetail}/>
-        } else {
-            listDetailTag = "";
-        }
-
         return (
-          <li className={this.props.className} onClick={this.handleClick}>{JSON.stringify(this.props.printData)}</li>
+            <li className={this.props.className} onClick={this._handleClick}>
+                {JSON.stringify(this.props.printData)}
+            </li>
         );
     }
 });
@@ -51,7 +71,7 @@ var ListDetail = React.createClass({
     render : function() {
 
         return (
-            <ul className={this.props.className}></ul>
+            <ul></ul>
         );
     }
 });
