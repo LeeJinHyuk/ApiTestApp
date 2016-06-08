@@ -152,47 +152,69 @@
 	    displayName: "Content",
 
 
+	    // 기본 제공 state 초기화
 	    getInitialState: function getInitialState() {
-	        return { isOpen: false };
+	        return {
+	            isOpen: false,
+	            selected_index: 0
+	        };
 	    },
 
-	    handleClick: function handleClick(event) {
+	    // onClick 이벤트
+	    handleClick: function handleClick(index) {
 	        if (this.state.isOpen === true) {
-	            this.setState({ isOpen: false });
+	            this.setState({
+	                isOpen: false,
+	                selected_index: index
+	            });
 	        } else {
-	            this.setState({ isOpen: true });
+	            this.setState({
+	                isOpen: true,
+	                selected_index: index
+	            });
 	        }
+	    },
+
+	    // onClick 으로 상태 변경에 따라 리스트 상세 노출
+	    showListDetail: function showListDetail(index, result) {
+	        var listDetailTag;
+	        var detail_index = "";
+
+	        detail_index = "detail_" + index;
+
+	        if (this.state.isOpen === true && index === this.state.selected_index) {
+	            listDetailTag = React.createElement(ListDetail, { className: detail_index, printData: result });
+	        } else {
+	            listDetailTag = "";
+	        }
+	        return listDetailTag;
 	    },
 
 	    render: function render() {
 	        var that = this;
 
-	        // if (this.state.isOpen === true) {
-	        //     listDetailTag = <ListDetail />;
-	        // } else {
-	        //     listDetailTag = "";
-	        // }
+	        function makeList() {
+	            var item;
+
+	            item = that.props.printData.map(function (result, idx) {
+	                var index = "";
+
+	                index = "list_" + idx + " ellipsis";
+
+	                return [React.createElement(List, { className: index, index: idx, onClick: that.handleClick, key: idx, printData: result }), React.createElement(
+	                    "ul",
+	                    null,
+	                    that.showListDetail(idx, result)
+	                )];
+	            });
+
+	            return item;
+	        }
 
 	        return React.createElement(
 	            "ul",
 	            { className: "content" },
-	            this.props.printData.map(function (result, idx) {
-	                var index = "";
-	                var listDetailTag;
-
-	                index = "list_" + idx + " ellipsis";
-
-	                if (that.state.isOpen === true) {
-	                    listDetailTag = React.createElement(ListDetail, null);
-	                } else {
-	                    listDetailTag = "";
-	                }
-
-	                return React.createElement(List, { className: index, onClick: that.handleClick, key: idx, printData: result });
-	                {
-	                    listDetailTag;
-	                }
-	            })
+	            makeList()
 	        );
 	    }
 	});
@@ -202,7 +224,7 @@
 
 
 	    _handleClick: function _handleClick(event) {
-	        this.props.onClick();
+	        this.props.onClick(this.props.index);
 	    },
 
 	    render: function render() {
@@ -220,7 +242,11 @@
 
 	    render: function render() {
 
-	        return React.createElement("ul", null);
+	        return React.createElement(
+	            "li",
+	            { className: this.props.className },
+	            JSON.stringify(this.props.printData)
+	        );
 	    }
 	});
 
