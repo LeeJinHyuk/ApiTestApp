@@ -155,24 +155,15 @@
 	    // 기본 제공 state 초기화
 	    getInitialState: function getInitialState() {
 	        return {
-	            isOpen: false,
-	            selected_index: 0
+	            selected_index: -1
 	        };
 	    },
 
 	    // onClick 이벤트
 	    handleClick: function handleClick(index) {
-	        if (this.state.isOpen === true) {
-	            this.setState({
-	                isOpen: false,
-	                selected_index: index
-	            });
-	        } else {
-	            this.setState({
-	                isOpen: true,
-	                selected_index: index
-	            });
-	        }
+	        this.setState({
+	            selected_index: index
+	        });
 	    },
 
 	    // onClick 으로 상태 변경에 따라 리스트 상세 노출
@@ -182,7 +173,8 @@
 
 	        detail_index = "detail_" + index;
 
-	        if (this.state.isOpen === true && index === this.state.selected_index) {
+	        if (index === this.state.selected_index) {
+	            // 선택된 인덱스에 해당하는 디테일만 표시하도록 조건 추가
 	            listDetailTag = React.createElement(ListDetail, { className: detail_index, printData: result });
 	        } else {
 	            listDetailTag = "";
