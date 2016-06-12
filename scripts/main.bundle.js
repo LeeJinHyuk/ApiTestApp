@@ -151,18 +151,27 @@
 	var Content = React.createClass({
 	    displayName: "Content",
 
-
 	    // 기본 제공 state 초기화
 	    getInitialState: function getInitialState() {
 	        return {
-	            selected_index: -1
+	            selected_array: []
 	        };
 	    },
 
 	    // onClick 이벤트
 	    handleClick: function handleClick(index) {
+	        var tmp_array;
+
+	        if (this.state.selected_array[index] === true) {
+	            // 선택된 상태이기 때문에 해제
+	            tmp_array = this.state.selected_array[index] = false;
+	        } else {
+	            // 선택안되거나 해제된 상태이기 때문에 선택
+	            tmp_array = this.state.selected_array[index] = true;
+	        }
+
 	        this.setState({
-	            selected_index: index
+	            selected_index: tmp_array
 	        });
 	    },
 
@@ -173,8 +182,8 @@
 
 	        detail_index = "detail_" + index;
 
-	        if (index === this.state.selected_index) {
-	            // 선택된 인덱스에 해당하는 디테일만 표시하도록 조건 추가
+	        if (this.state.selected_array[index] === true) {
+	            // 선택된 인덱스에 해당하는 디테일만 표시
 	            listDetailTag = React.createElement(ListDetail, { className: detail_index, printData: result });
 	        } else {
 	            listDetailTag = "";
