@@ -51,12 +51,17 @@ var Content = React.createClass({
 
             item =  that.props.printData.map(function(result, idx) {
                 var index = "";
+                var detail_class = "detailBox";
 
                 index = "list_" + idx + " ellipsis";
 
+                if (!that.state.selected_array[idx]) {
+                    detail_class = "";
+                }
+
                 return ([
                     <List className={index} index={idx} onClick={that.handleClick} key={idx} printData={result}/>,
-                    <ul>{that.showListDetail(idx, result)}</ul>
+                    <ul className={detail_class}>{that.showListDetail(idx, result)}</ul>
                 ]);
             });
             

@@ -5,6 +5,12 @@ body {
     height: 100%;
 }
 
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
 #contentBox {
     margin: 10px 0px;
     width: 1022px;
@@ -17,7 +23,6 @@ body {
 .content {
     margin: 10px;
     padding: 0px;
-    list-style: none;
     font-size: 20px;
     font-weight: bold;
     border-top: 1px solid rgba(0,0,0,0.3);
@@ -40,4 +45,18 @@ body {
     white-space : nowrap;
     text-overflow : ellipsis;
     overflow : hidden;
+}
+
+.content .detailBox {
+    width: 985px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.content li[class^="detail_"] {
+    margin: 10px;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y : scroll;
+    font-weight: normal;
+    background-color: rgb(255,255,255);
 }
