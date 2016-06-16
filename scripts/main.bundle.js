@@ -251,7 +251,11 @@
 	        return React.createElement(
 	            "li",
 	            { className: this.props.className },
-	            JSON.stringify(this.props.printData)
+	            React.createElement(
+	                "pre",
+	                null,
+	                JSON.stringify(this.props.printData, undefined, 4)
+	            )
 	        );
 	    }
 	});

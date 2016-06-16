@@ -97,7 +97,7 @@ var ListDetail = React.createClass({
 
         return (
             <li className={this.props.className}>
-                {JSON.stringify(this.props.printData)}
+                <pre>{JSON.stringify(this.props.printData, undefined, 4)}</pre>
             </li>
         );
     }
