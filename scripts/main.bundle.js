@@ -122,6 +122,7 @@
 	        dataManager.addEventListener(showResponseListData);
 	        // 데이터 수신 시 실행할 리스너 등록
 	        socketManager.addEventListener(dataManager.setData);
+	        showResponseListData();
 	    }
 
 	    /**
@@ -196,23 +197,24 @@
 
 	        function makeList() {
 	            var item;
+	            if (that.props.printData) {
+	                item = that.props.printData.map(function (result, idx) {
+	                    var index = "";
+	                    var detail_class = "detailBox";
 
-	            item = that.props.printData.map(function (result, idx) {
-	                var index = "";
-	                var detail_class = "detailBox";
+	                    index = "list_" + idx + " ellipsis";
 
-	                index = "list_" + idx + " ellipsis";
+	                    if (!that.state.selected_array[idx]) {
+	                        detail_class = "";
+	                    }
 
-	                if (!that.state.selected_array[idx]) {
-	                    detail_class = "";
-	                }
-
-	                return [React.createElement(List, { className: index, index: idx, onClick: that.handleClick, key: idx, printData: result }), React.createElement(
-	                    "ul",
-	                    { className: detail_class },
-	                    that.showListDetail(idx, result)
-	                )];
-	            });
+	                    return [React.createElement(List, { className: index, index: idx, onClick: that.handleClick, key: idx, printData: result }), React.createElement(
+	                        "ul",
+	                        { className: detail_class },
+	                        that.showListDetail(idx, result)
+	                    )];
+	                });
+	            }
 
 	            return item;
 	        }

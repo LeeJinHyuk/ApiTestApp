@@ -9,6 +9,7 @@ var viewManager = (function() {
         dataManager.addEventListener(showResponseListData);
         // 데이터 수신 시 실행할 리스너 등록
         socketManager.addEventListener(dataManager.setData);
+        showResponseListData();
     }
 
     /**
