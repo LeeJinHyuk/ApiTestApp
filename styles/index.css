@@ -59,3 +59,12 @@ ul {
     font-weight: normal;
     background-color: rgb(255,255,255);
 }
+
+.nav {
+    width: 1022px;
+    height: 200px;
+}
+
+. nav li {
+    display: inline-block;
+}
