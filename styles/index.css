@@ -17,7 +17,6 @@ ul {
     height: 800px;
     overflow-y: scroll;
     border: 1px solid #000000;
-    background: rgba(0,0,0,0.1);
 }
 
 .content {
@@ -38,7 +37,7 @@ ul {
 
 .content li[class^="list_"]:hover {
     cursor : pointer;
-    background: rgba(34,116,28,0.2);
+    background: rgba(0,0,0,0.1);
 }
 
 .content .ellipsis {
