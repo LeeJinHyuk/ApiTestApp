@@ -2,6 +2,9 @@
  * Created by eerto_000 on 2016-05-11.
  */
 "use strict";
+
+var Nav = require("../nav/nav");
+
 var Content = React.createClass({
     // 기본 제공 state 초기화
     getInitialState : function() {
@@ -75,6 +78,9 @@ var Content = React.createClass({
                     <ul className="content">
                         {makeList()}
                     </ul>
+                </div>
+                <div id="navBox">
+                    <Nav />
                 </div>
             </div>
         );

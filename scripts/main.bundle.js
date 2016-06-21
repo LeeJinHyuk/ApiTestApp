@@ -113,7 +113,7 @@
 	"use strict";
 
 	var Content = __webpack_require__(3);
-	var dataManager = __webpack_require__(4);
+	var dataManager = __webpack_require__(5);
 
 	var viewManager = function () {
 
@@ -142,12 +142,14 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by eerto_000 on 2016-05-11.
 	 */
 	"use strict";
+
+	var Nav = __webpack_require__(4);
 
 	var Content = React.createClass({
 	    displayName: "Content",
@@ -230,6 +232,11 @@
 	                    { className: "content" },
 	                    makeList()
 	                )
+	            ),
+	            React.createElement(
+	                "div",
+	                { id: "navBox" },
+	                React.createElement(Nav, null)
 	            )
 	        );
 	    }
@@ -274,6 +281,56 @@
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by eerto_000 on 2016-06-19.
+	 */
+	"use strict";
+
+	var Nav = React.createClass({
+	    displayName: "Nav",
+
+
+	    render: function render() {
+	        return React.createElement(
+	            "ul",
+	            { className: "navBox" },
+	            React.createElement(
+	                "li",
+	                { className: "clear" },
+	                React.createElement(
+	                    "span",
+	                    null,
+	                    "Screen Clear"
+	                )
+	            ),
+	            React.createElement(
+	                "li",
+	                { className: "screenCopy" },
+	                React.createElement(
+	                    "span",
+	                    null,
+	                    "Save All Data"
+	                )
+	            ),
+	            React.createElement(
+	                "li",
+	                { className: "selectItemCopy" },
+	                React.createElement(
+	                    "span",
+	                    null,
+	                    "Save Selected Data"
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Nav;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports) {
 
 	/**
