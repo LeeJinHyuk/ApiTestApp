@@ -19,7 +19,7 @@ var viewManager = (function() {
         console.log("[viewManager] showResponseListData data : " + data);
         ReactDOM.render(
             <Content printData={data} />,
-            document.getElementById("contentBox")
+            document.getElementsByTagName("BODY")[0]
         );
     }
 

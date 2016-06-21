@@ -130,7 +130,7 @@
 	     */
 	    function showResponseListData(data) {
 	        console.log("[viewManager] showResponseListData data : " + data);
-	        ReactDOM.render(React.createElement(Content, { printData: data }), document.getElementById("contentBox"));
+	        ReactDOM.render(React.createElement(Content, { printData: data }), document.getElementsByTagName("BODY")[0]);
 	    }
 
 	    return {
@@ -220,9 +220,17 @@
 	        }
 
 	        return React.createElement(
-	            "ul",
-	            { className: "content" },
-	            makeList()
+	            "div",
+	            { id: "container" },
+	            React.createElement(
+	                "div",
+	                { id: "contentBox" },
+	                React.createElement(
+	                    "ul",
+	                    { className: "content" },
+	                    makeList()
+	                )
+	            )
 	        );
 	    }
 	});

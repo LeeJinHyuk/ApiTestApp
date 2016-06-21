@@ -70,9 +70,13 @@ var Content = React.createClass({
         }
         
         return (
-            <ul className="content">
-                {makeList()}
-            </ul>
+            <div id="container">
+                <div id="contentBox">
+                    <ul className="content">
+                        {makeList()}
+                    </ul>
+                </div>
+            </div>
         );
     }
 });

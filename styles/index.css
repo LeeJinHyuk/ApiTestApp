@@ -11,8 +11,15 @@ ul {
     list-style: none;
 }
 
-#contentBox {
+#container {
     margin: 10px 0px;
+    padding: 0px;
+    width: 1024px;
+}
+
+#contentBox {
+    margin: 0px;
+    padding: 0px;
     width: 1022px;
     height: 800px;
     overflow-y: scroll;
