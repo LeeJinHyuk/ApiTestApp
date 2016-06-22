@@ -26,8 +26,12 @@ var Content = React.createClass({
         }
 
         this.setState({
-            selected_index : tmp_array
+            selected_array : this.state.selected_array
         });
+    },
+
+    handleClickForNav : function(event) {
+        this.props.onClearData();
     },
 
     // onClick 으로 상태 변경에 따라 리스트 상세 노출
@@ -68,8 +72,14 @@ var Content = React.createClass({
                     ]);
                 });
             }
-            
             return item;
+        }
+
+        function makeNav() {
+            var navTag;
+            
+            navTag = <Nav onClick={that.handleClickForNav} />;
+            return navTag;
         }
         
         return (
@@ -80,7 +90,7 @@ var Content = React.createClass({
                     </ul>
                 </div>
                 <div id="navBox">
-                    <Nav />
+                    {makeNav()}
                 </div>
             </div>
         );

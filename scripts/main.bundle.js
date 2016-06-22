@@ -130,7 +130,7 @@
 	     */
 	    function showResponseListData(data) {
 	        console.log("[viewManager] showResponseListData data : " + data);
-	        ReactDOM.render(React.createElement(Content, { printData: data }), document.getElementsByTagName("BODY")[0]);
+	        ReactDOM.render(React.createElement(Content, { printData: data, onClearData: dataManager.clearData }), document.getElementsByTagName("BODY")[0]);
 	    }
 
 	    return {
@@ -174,8 +174,12 @@
 	        }
 
 	        this.setState({
-	            selected_index: tmp_array
+	            selected_array: this.state.selected_array
 	        });
+	    },
+
+	    handleClickForNav: function handleClickForNav(event) {
+	        this.props.onClearData();
 	    },
 
 	    // onClick 으로 상태 변경에 따라 리스트 상세 노출
@@ -217,8 +221,14 @@
 	                    )];
 	                });
 	            }
-
 	            return item;
+	        }
+
+	        function makeNav() {
+	            var navTag;
+
+	            navTag = React.createElement(Nav, { onClick: that.handleClickForNav });
+	            return navTag;
 	        }
 
 	        return React.createElement(
@@ -236,7 +246,7 @@
 	            React.createElement(
 	                "div",
 	                { id: "navBox" },
-	                React.createElement(Nav, null)
+	                makeNav()
 	            )
 	        );
 	    }
@@ -292,13 +302,17 @@
 	    displayName: "Nav",
 
 
+	    _handleClick: function _handleClick(event) {
+	        this.props.onClick(event);
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            "ul",
 	            { className: "navBox" },
 	            React.createElement(
 	                "li",
-	                { className: "clear" },
+	                { className: "clear", onClick: this._handleClick },
 	                React.createElement(
 	                    "span",
 	                    null,
@@ -312,15 +326,6 @@
 	                    "span",
 	                    null,
 	                    "Save All Data"
-	                )
-	            ),
-	            React.createElement(
-	                "li",
-	                { className: "selectItemCopy" },
-	                React.createElement(
-	                    "span",
-	                    null,
-	                    "Save Selected Data"
 	                )
 	            )
 	        );
@@ -350,6 +355,14 @@
 	        }
 	    }
 
+	    function _clearData() {
+	        printData = [];
+
+	        for (var i = 0; i < listener.length; i++) {
+	            listener[i](printData);
+	        }
+	    }
+
 	    function _addEventListener(callback) {
 	        if (listener.indexOf(callback) === -1) {
 	            listener.push(callback);
@@ -358,6 +371,7 @@
 
 	    return {
 	        setData: _setData,
+	        clearData: _clearData,
 	        addEventListener: _addEventListener
 	    };
 	}();
