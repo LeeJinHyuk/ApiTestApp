@@ -18,7 +18,7 @@ var viewManager = (function() {
     function showResponseListData(data) {
         console.log("[viewManager] showResponseListData data : " + data);
         ReactDOM.render(
-            <Content printData={data} />,
+            <Content printData={data} onClearData={dataManager.clearData} />,
             document.getElementsByTagName("BODY")[0]
         );
     }

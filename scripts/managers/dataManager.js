@@ -15,6 +15,14 @@ var dataManager = (function() {
         }
     }
 
+    function _clearData() {
+        printData = [];
+
+        for(var i = 0; i < listener.length; i++) {
+            listener[i](printData);
+        }
+    }
+
     function _addEventListener(callback) {
         if (listener.indexOf(callback) === -1) {
             listener.push(callback);
@@ -23,6 +31,7 @@ var dataManager = (function() {
 
     return {
         setData : _setData,
+        clearData : _clearData,
         addEventListener : _addEventListener
     }
 }());
