@@ -6,8 +6,7 @@ var qs = require('querystring');
 
 var handle = {
     "/" : _loadMainPage,
-    "/requestData" : _sendData,
-    "/responseData" : _sendData,
+    "/sendData" : _sendData,
     "file" : _loadMainFile
 };
 
@@ -66,11 +65,7 @@ function _sendData(urlObj, response, request, ioObj) {
             response.writeHead(200, cors);
             response.end();
 
-            if (urlObj.pathName === "/requestData") {
-                transmitData(ioObj, qs.parse(postData));
-            } else {
-                transmitData(ioObj, JSON.parse(postData));
-            }
+            transmitData(ioObj, JSON.parse(postData));
         });
     }
 }
