@@ -98,15 +98,19 @@ var Content = React.createClass({
 });
 
 var List = React.createClass({
-
+    
     _handleClick : function(event) {
         this.props.onClick(this.props.index);
     },
 
     render : function() {
+        var data = this.props.printData;
+        var text = "[" + data.time + "] " + "[" + data.type + "] " + 
+            "[" + data.apiName + "] " + "[" + data.apiUrl + "]";
+        
         return (
             <li className={this.props.className} onClick={this._handleClick}>
-                {JSON.stringify(this.props.printData)}
+                <span>{text}</span>
             </li>
         );
     }
@@ -115,10 +119,11 @@ var List = React.createClass({
 var ListDetail = React.createClass({
 
     render : function() {
-
+        var data = this.props.printData;
+        
         return (
             <li className={this.props.className}>
-                <pre>{JSON.stringify(this.props.printData, undefined, 4)}</pre>
+                <pre>{JSON.stringify(data.data, undefined, 4)}</pre>
             </li>
         );
     }

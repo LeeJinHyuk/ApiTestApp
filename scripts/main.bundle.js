@@ -261,10 +261,17 @@
 	    },
 
 	    render: function render() {
+	        var data = this.props.printData;
+	        var text = "[" + data.time + "] " + "[" + data.type + "] " + "[" + data.apiName + "] " + "[" + data.apiUrl + "]";
+
 	        return React.createElement(
 	            "li",
 	            { className: this.props.className, onClick: this._handleClick },
-	            JSON.stringify(this.props.printData)
+	            React.createElement(
+	                "span",
+	                null,
+	                text
+	            )
 	        );
 	    }
 	});
@@ -274,6 +281,7 @@
 
 
 	    render: function render() {
+	        var data = this.props.printData;
 
 	        return React.createElement(
 	            "li",
@@ -281,7 +289,7 @@
 	            React.createElement(
 	                "pre",
 	                null,
-	                JSON.stringify(this.props.printData, undefined, 4)
+	                JSON.stringify(data.data, undefined, 4)
 	            )
 	        );
 	    }
