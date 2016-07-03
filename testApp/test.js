@@ -10,10 +10,28 @@
  */
 window.onload = function() {
     var obj = {
-        "test" : [
-            {"abc" : "1"},
-            {"bbc" : "2"}
-        ]
+        "type" : "REQ",
+        "apiName" : "AMOC Manager",
+        "apiUrl" : "/amoc-api/vod/buy/in-cash-nxt",
+        "data" : {
+            "pkgList": [
+                {
+                    "pkgCode": "2PG8",
+                    "pkgName": "olleh tv GiGA UHD (STB)",
+                    "pkgClass": "1"
+                },
+                {
+                    "pkgCode": "2P29",
+                    "pkgName": "KBS 무제한 즐기기",
+                    "pkgClass": "3"
+                },
+                {
+                    "pkgCode": "2PF8",
+                    "pkgName": "프라임 무비팩",
+                    "pkgClass": "3"
+                }
+            ]
+        }
     };
     var test;
 
