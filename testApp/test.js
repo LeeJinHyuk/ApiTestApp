@@ -10,6 +10,7 @@
  */
 window.onload = function() {
     var obj = {
+        "time" : "22:30:40",
         "type" : "REQ",
         "apiName" : "AMOC Manager",
         "apiUrl" : "/amoc-api/vod/buy/in-cash-nxt",
