@@ -30,7 +30,7 @@ ul {
 .content {
     margin: 10px;
     padding: 0px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     /*border-top: 1px solid rgba(0,0,0,0.3);*/
 }
@@ -65,7 +65,7 @@ ul {
     max-height: 500px;
     overflow-y : scroll;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     background-color: rgb(255,255,255);
 }
 
